@@ -1,0 +1,91 @@
+---
+
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Writing Assistant</title>
+    <link rel="stylesheet" href="styles/pico.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <div id="main" class="container">
+      <h1>Writing Assistant <small>(Beta 0.613)</small></h1>
+      <p>
+        To get feedback on your essay, copy-paste the essay rubric (assignment
+        requirements) and the essay text into the appropriate text areas and
+        press the "Get Feedback" button. Once you make changes to your essay,
+        you can replace the old version of your essay with a new one and get
+        additonal feedback.
+      </p>
+      <form id="text-form">
+        <label for="text1">Rubric</label>
+        <textarea id="text1" name="text1" required></textarea>
+
+        <label for="text2">Essay</label>
+        <textarea id="text2" name="text2" required></textarea>
+
+        <!--<button type="submit" method="POST">Process Texts</button>-->
+      </form>
+      <button id="submit-btn">Get Feedback</button>
+      <button id="wait-btn" aria-busy="true" style="display:none"
+        >Please wait…</button
+      >
+
+      <article id="result"></article>
+
+      <footer class="container">
+        <small>Built by Mark Druskin • Anton Druskin</small>
+      </footer>
+      <!--
+    <section id="loading">
+      <h2>Loading</h2>
+      <article id="result" aria-busy="true"></article>
+
+    </section>
+  -->
+    </div>
+    <script>
+      import { marked } from "marked";
+
+      //const form = document.getElementById('text-form');
+      const btn = document.getElementById("submit-btn");
+      const wait_btn = document.getElementById("wait-btn");
+      const result_div = document.getElementById("result");
+
+      btn.addEventListener("click", async (event) => {
+        //form.addEventListener('submit', async (event) => {
+        //event.preventDefault(); // Prevent the form from reloading the page
+
+        btn.style.display = "none";
+        wait_btn.style.display = "block";
+
+        // Get the input values
+        const text1 = document.getElementById("text1").value;
+        const text2 = document.getElementById("text2").value;
+
+        //try {
+        // Send the data to the backend API
+        const response = await fetch(location.origin + "/api", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text1, text2 }),
+        });
+        let result = await response.json();
+        console.log(result.message);
+        result_div.style.display = "block";
+        result_div.innerHTML = marked.parse(result.message);
+        btn.style.display = "block";
+        wait_btn.style.display = "none";
+      });
+      /*
+        if (!response.ok) {
+          throw new Error('Failed to process texts
+          */
+    </script>
+  </body>
+</html>
