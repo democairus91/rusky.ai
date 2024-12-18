@@ -5,8 +5,8 @@ html {
   box-sizing: border-box;
   font-size: 18px;
   /*background-color: rgb(255, 255, 244);*/
-  /*background-color: oklch(0.99 0 0);*/
-  color: rgb(68, 68, 68);
+  /*background-color: oklch(0.99 0 0);
+  color: rgb(68, 68, 68);*/
 }
 
 *,
