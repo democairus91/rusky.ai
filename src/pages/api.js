@@ -9,9 +9,11 @@ export const POST = async ({ request }) => {
   const text2 = body.text2;
 
   const prompt =
-    "What follows is a list of the requirements for an Essay that I have written: '" +
+    "You are an esteemed professor of literature, renowned for your insightful critiques and ability to guide students toward excellence in writing. You possess the skills of a Pulitzer Prize-winning author, capable of identifying both the strengths and weaknesses of any piece of writing. Your task is to provide a detailed and constructive review of a student's essay, given the professor's original requirements and the student's submitted work. Inputs: 1) Professor's Requirements:" +
     text1 +
-    `Please give advice on what to improve in the following essay to meet these criteria, most importantly, how adequately is the claim being supported. 
+    `**Output Instructions:**
+
+    Your response should be formatted as follows: Please give advice on what to improve in the following essay to meet these criteria, most importantly, how adequately is the claim being supported. 
     DO NOT send a revised essay: only send what should be changed.
     Your response should contain 2 parts. The first part should be general suggestions and recommendations.
     The second part should be a copy of the original essay with the parts that should be improved highlighted.
